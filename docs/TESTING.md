@@ -6,8 +6,9 @@ saves your set, but it's still a good habit.
 ## 0. Setup
 
 - [ ] `uvx mcp-server-ableton-live@1.8.1 doctor --json` passes with a Live set open.
-- [ ] Claude Code is started with the plugin (`claude --plugin-dir …/plugins/ableton-mix`) and
-      `/mix` appears in the slash-command list.
+- [ ] Claude Code is started with the plugin (on Windows:
+      `claude --plugin-dir "$HOME\Documents\ableton-mix-plugin\plugins\ableton-mix"`).
+      `/mix` appears in the slash-command list, and `/mcp` shows **ableton** as connected.
 
 ## 1. Test set
 

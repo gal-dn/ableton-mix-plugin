@@ -27,35 +27,83 @@ The plugin itself is only Markdown and JSON. It contains no executable code.
 
 ## Requirements (on the computer that runs Ableton)
 
+Written for **Windows 10/11**. On macOS the steps are the same; only the commands in the
+[macOS note](#macos) differ.
+
 - Ableton Live **12** (built and reviewed for 12.3+ Suite; 11 should work too)
-- [Claude Code](https://claude.com/claude-code) CLI
-- [uv](https://docs.astral.sh/uv/) (`brew install uv`); it fetches Python 3.10+ if needed
+- [Claude Code](https://code.claude.com/docs/en/setup) for Windows
+- [uv](https://docs.astral.sh/uv/), which fetches Python 3.10+ by itself, so you don't need to install Python
+- [Git for Windows](https://git-scm.com/downloads/win), to clone this repo. Claude Code also uses it
+  for its Bash tool.
 
-## Install (about 5 minutes)
+## Install on Windows (about 10 minutes)
 
-1. **Get this repo** onto the Ableton computer: clone it, or unpack the tarball.
-2. **Install the Live-side Remote Script** (one time, and again after any server upgrade):
-   ```bash
+Run all commands in **PowerShell** (Start menu → "PowerShell"; the prompt starts with `PS C:\`).
+After installing a tool, **open a new PowerShell window** so it's on your PATH.
+
+1. **Install the tools** (skip any you already have):
+   ```powershell
+   winget install --id=astral-sh.uv -e
+   winget install --id=Git.Git -e
+   irm https://claude.ai/install.ps1 | iex
+   ```
+   Open a new PowerShell window and check: `uvx --version`, `git --version`, `claude --version`.
+
+2. **Get this repo.** Until the PR is merged, the plugin lives on the `feat/mix-engineer-plugin`
+   branch:
+   ```powershell
+   cd $HOME\Documents
+   git clone -b feat/mix-engineer-plugin https://github.com/gal-dn/ableton-mix-plugin
+   ```
+   Git will open a browser window to sign in to GitHub the first time, because the repo is private.
+
+3. **Install the Live-side Remote Script** (once, and again after any server upgrade):
+   ```powershell
    uvx mcp-server-ableton-live@1.8.1 install
    ```
-3. **Turn it on in Live.** Fully quit and reopen Live. Open **Settings › Tempo & MIDI**, and in an
-   unused **Control Surface** row choose **AbletonMCP**. Set that row's **Input** and **Output**
-   to **None**.
-4. **Check it**, with a Live set open:
-   ```bash
+   It copies the script to `Documents\Ableton\User Library\Remote Scripts`. If you get
+   *"User Library not found"*, see [Troubleshooting](#troubleshooting-windows).
+
+4. **Turn it on in Live.** Fully quit and reopen Live. Open **Options › Settings** (`Ctrl+,`) and
+   go to the **Tempo & MIDI** tab. In an unused **Control Surface** row choose **AbletonMCP**, and
+   set that row's **Input** and **Output** to **None**.
+
+5. **Check it**, with a Live set open:
+   ```powershell
    uvx mcp-server-ableton-live@1.8.1 doctor --json
    ```
-5. **Load the plugin in Claude Code.** Either:
+
+6. **Start Claude Code with the plugin.** Either:
    - **try it for one session:**
-     ```bash
-     claude --plugin-dir /path/to/ableton-mix-plugin/plugins/ableton-mix
+     ```powershell
+     claude --plugin-dir "$HOME\Documents\ableton-mix-plugin\plugins\ableton-mix"
      ```
-   - **or install it:**
-     ```bash
-     claude plugin marketplace add /path/to/ableton-mix-plugin
+   - **or install it** so it loads every time:
+     ```powershell
+     claude plugin marketplace add "$HOME\Documents\ableton-mix-plugin"
      claude plugin install ableton-mix@ableton-mix-plugin
      ```
-     Once this repo is on GitHub, use `claude plugin marketplace add <owner>/ableton-mix-plugin`.
+     After the PR is merged you can use `claude plugin marketplace add gal-dn/ableton-mix-plugin`
+     instead of the local path.
+
+   Inside Claude Code, `/mcp` should list **ableton** as connected.
+
+### Troubleshooting (Windows)
+
+| Symptom | Fix |
+|---|---|
+| `uvx`, `git` or `claude` "is not recognized" | Open a **new** PowerShell window. If it still fails, sign out of Windows and back in, so PATH refreshes. |
+| `install` says *"User Library not found"* | Your Documents folder is probably synced by **OneDrive**. In Live, open **Options › Settings › Library** and copy the *User Library* path, then run `uvx mcp-server-ableton-live@1.8.1 install --user-library "<that path>"`. Pass the same `--user-library` to `doctor`. |
+| **AbletonMCP** isn't in the Control Surface list | Quit Live completely (check the system tray), reopen it, and look again. Re-run `install` if needed. |
+| `doctor` can't connect | Live must be open with the AbletonMCP row selected. The bridge only talks over `127.0.0.1:9877`, so it doesn't need a Windows Firewall exception. If another app uses port 9877, see the [server README](https://github.com/wstierhout/ableton-live-mcp#readme) for changing the port. |
+| `/mcp` shows **ableton** failed | Run `uvx mcp-server-ableton-live@1.8.1 --version` in PowerShell. It must print `1.8.1` there before Claude Code can start it. |
+
+### macOS
+
+Same steps, with these differences: install the tools with `brew install uv git` plus
+`curl -fsSL https://claude.ai/install.sh | bash`. The default User Library is
+`~/Music/Ableton/User Library`. Live's settings are under **Live › Settings** (`Cmd+,`), and paths
+use `/` (e.g. `claude --plugin-dir ~/Documents/ableton-mix-plugin/plugins/ableton-mix`).
 
 ## Use it
 
