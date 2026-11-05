@@ -1,0 +1,16 @@
+{
+  "name": "ableton-mix",
+  "version": "0.1.0",
+  "description": "Plain-English mixing for Ableton Live: turns requests like \"boost the bass on the piano\" into small, reversible EQ Eight and mixer changes in the running Live set.",
+  "author": {
+    "name": "gal-dn"
+  },
+  "keywords": [
+    "ableton",
+    "live",
+    "mixing",
+    "eq",
+    "music-production",
+    "mcp"
+  ]
+}
