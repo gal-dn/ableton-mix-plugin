@@ -32,7 +32,11 @@ Written for **Windows 10/11**. On macOS the steps are the same; only the command
 
 - Ableton Live **12** (built and reviewed for 12.3+ Suite; 11 should work too)
 - [Claude Code](https://code.claude.com/docs/en/setup) for Windows
-- [uv](https://docs.astral.sh/uv/), which fetches Python 3.10+ by itself, so you don't need to install Python
+- [uv](https://docs.astral.sh/uv/), which fetches Python 3.10+ by itself, so you don't need to install Python.
+  On Windows, install it in PowerShell with `winget install --id=astral-sh.uv -e`, or, if
+  winget isn't available, with
+  `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`.
+  Then open a new PowerShell window and check with `uv --version`.
 - [Git for Windows](https://git-scm.com/downloads/win), to clone this repo. Claude Code also uses it
   for its Bash tool.
 
