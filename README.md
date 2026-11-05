@@ -118,6 +118,10 @@ undo
 Plain sentences work too: the skill triggers on mixing requests without the slash command.
 See [docs/TESTING.md](docs/TESTING.md) for the acceptance checklist.
 
+**Coming next** ([roadmap](docs/ROADMAP.md)): a `producer` skill for style-level requests such as
+"mix it like a Stevie Wonder song" or "make it a dark 80s mix", then matching your mix against
+reference tracks you supply.
+
 ## What it will and won't do
 
 **Will**
