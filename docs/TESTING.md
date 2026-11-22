@@ -8,7 +8,8 @@ saves your set, but it's still a good habit.
 - [ ] `uvx mcp-server-ableton-live@1.8.1 doctor --json` passes with a Live set open.
 - [ ] Claude Code is started with the plugin (on Windows:
       `claude --plugin-dir "$HOME\Documents\ableton-mix-plugin\plugins\ableton-mix"`).
-      `/mix` appears in the slash-command list, and `/mcp` shows **ableton** as connected.
+      `/ableton-mix:mix` appears in the slash-command list (type `/ableton` to find it), and
+      `/mcp` shows **ableton** as connected.
 
 ## 1. Test set
 
@@ -27,18 +28,18 @@ Create a new Live set with these tracks (any clips, ideally looping so you can l
 
 | # | Say | Expected |
 |---|---|---|
-| 1 | `/mix boost the bass on the piano channel` | EQ Eight added to **Grand Piano**; one band = Low Shelf, about 150 Hz, **+3.0 dB**; one-line report with the undo path |
+| 1 | `/ableton-mix:mix boost the bass on the piano channel` | EQ Eight added to **Grand Piano**; one band = Low Shelf, about 150 Hz, **+3.0 dB**; one-line report with the undo path |
 | 2 | `a bit less` | Same band drops to about +1.5 dB (no new band, no undo) |
 | 3 | `undo` | Band returns to its previous value; Claude says how many steps it undid |
-| 4 | `/mix make the vocals less harsh` | Asks: Lead Vox, Vox Dbl, or both? |
+| 4 | `/ableton-mix:mix make the vocals less harsh` | Asks: Lead Vox, Vox Dbl, or both? |
 | 5 | (answer) `Lead Vox` | Uses the **existing** EQ Eight (no second EQ); Bell about 3.5 kHz, **−3 dB** |
-| 6 | `/mix a lot more air on the lead vox` | High Shelf about 12 kHz, **+6 dB** (the per-request cap) on Lead Vox |
-| 7 | `/mix even more air` (repeat 2–3 times) | Stops at ±12 dB total and suggests an alternative instead of going further |
-| 8 | `/mix more thump on the kick` | Bell about 60 Hz (not a shelf), +3 dB |
-| 9 | `/mix turn the bass down a bit` | **Bass** track fader −0.03 (e.g. 0.85 → 0.82), not an EQ move |
-| 10 | `/mix brighten the pad` | Adds EQ Eight next to the third-party EQ; **asks first** if it wanted to change the plugin |
-| 11 | `/mix boost the bass on the trumpet` | No match: lists tracks and asks |
-| 12 | `/mix make it groovier` | Explains it can't do that, and offers what it can |
+| 6 | `/ableton-mix:mix a lot more air on the lead vox` | High Shelf about 12 kHz, **+6 dB** (the per-request cap) on Lead Vox |
+| 7 | `/ableton-mix:mix even more air` (repeat 2–3 times) | Stops at ±12 dB total and suggests an alternative instead of going further |
+| 8 | `/ableton-mix:mix more thump on the kick` | Bell about 60 Hz (not a shelf), +3 dB |
+| 9 | `/ableton-mix:mix turn the bass down a bit` | **Bass** track fader −0.03 (e.g. 0.85 → 0.82), not an EQ move |
+| 10 | `/ableton-mix:mix brighten the pad` | Adds EQ Eight next to the third-party EQ; **asks first** if it wanted to change the plugin |
+| 11 | `/ableton-mix:mix boost the bass on the trumpet` | No match: lists tracks and asks |
+| 12 | `/ableton-mix:mix make it groovier` | Explains it can't do that, and offers what it can |
 
 ## 3. Safety checks
 

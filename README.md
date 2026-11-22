@@ -19,7 +19,7 @@ You ──"more air on the hats"──▶ Claude ──skill: mix-engineer──
 | Piece | What it is | Who wrote it |
 |---|---|---|
 | `plugins/ableton-mix/skills/mix-engineer/` | The procedure, the vocabulary → EQ table, and EQ Eight notes | this repo |
-| `plugins/ableton-mix/commands/mix.md` | `/mix <request>` shortcut | this repo |
+| `plugins/ableton-mix/commands/mix.md` | `/ableton-mix:mix <request>` shortcut | this repo |
 | `plugins/ableton-mix/.mcp.json` | Starts [`mcp-server-ableton-live`](https://github.com/wstierhout/ableton-live-mcp) **1.8.1** via `uvx` | MIT, wstierhout |
 | AbletonMCP Remote Script | Runs inside Live and talks to the server over a local socket | ships with the server |
 
@@ -112,13 +112,15 @@ use `/` (e.g. `claude --plugin-dir ~/Documents/ableton-mix-plugin/plugins/ableto
 ## Use it
 
 ```
-/mix boost the bass on the piano
-/mix make the vocals a little less harsh
-/mix more air on the hats
-/mix turn the bass down a bit
+/ableton-mix:mix boost the bass on the piano
+/ableton-mix:mix make the vocals a little less harsh
+/ableton-mix:mix more air on the hats
+/ableton-mix:mix turn the bass down a bit
 undo
 ```
 
+Claude Code puts the plugin's name in front of its commands, so the command is
+`/ableton-mix:mix`, not `/mix`. Type `/ableton` and autocomplete will offer it.
 Plain sentences work too: the skill triggers on mixing requests without the slash command.
 See [docs/TESTING.md](docs/TESTING.md) for the acceptance checklist.
 

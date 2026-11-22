@@ -1,5 +1,5 @@
 ---
-description: Make a plain-English mixing change in the running Ableton Live set (e.g. /mix boost the bass on the piano)
+description: Make a plain-English mixing change in the running Ableton Live set (e.g. /ableton-mix:mix boost the bass on the piano)
 argument-hint: <what you want to hear, e.g. "boost the bass on the piano">
 ---
 
