@@ -1,0 +1,16 @@
+{
+  "name": "ableton-mix-plugin",
+  "owner": {
+    "name": "gal-dn"
+  },
+  "metadata": {
+    "description": "Plain-English mixing for a running Ableton Live set."
+  },
+  "plugins": [
+    {
+      "name": "ableton-mix",
+      "source": "./plugins/ableton-mix",
+      "description": "Say \"boost the bass on the piano\" and Claude makes the matching EQ Eight move in Live, reads it back, and keeps it one undo away."
+    }
+  ]
+}
